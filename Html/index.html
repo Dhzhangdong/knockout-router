@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title ></title>
+        <script src="../Scripts/jquery-3.2.1.js"></script>
+        <script src="../Scripts/knockout-3.4.0.debug.js"></script>
+        <script src="../Scripts/jquery.tmpl.js"></script>
+        <script src="../Scripts/knockout-router.js"></script>
+        <script type="text/javascript">
+            App.addPage(new Page({
+                title:"xxxx",
+                tmpid:"test",
+                path:"testpage",
+                state:{
+                    name:ko.observable("dongdong")
+                },
+                init:function(page){
+                    console.log(this.path+":init");
+                },
+                create:function(param){
+                    console.log(this.path+":create");
+                    console.log(param);
+                },
+                dispose:function(){
+                    console.log(this.path+":dispose");
+                },
+                child:[]
+            }));
+            App.init();
+            jQuery(function(){
+                ko.applyBindings(App);
+                App.open("testpage",{});
+            });
+            
+        </script>
+        <script type="text/template" id="testpage">
+            你好
+        </script>
+        
+        <script type="text/template" id="def">
+            def
+        </script>
+    </head>
+    <body>
+        <div data-bind="template:{ name:App.State.tmpid,data:App.State.tmpdata}">
+
+        </div>
+
+    </body>
+</html>
