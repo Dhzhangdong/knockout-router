@@ -33,23 +33,23 @@ var App=new function(){
 
         //释放当前页面
         if (_salf.State.currentPage()!=null) {
-            var oldpage = this.pagemap[this.lastpage()];
-            oldpage.dispose();
+            _salf.State.currentPage().dispose();
         }
-        this.lastpage(pagename);
-        
-        _salf.State.tmpid=deftmpid;
-        _salf.State.tmpdata=page.state;
-        _salf.State.tmpid=page.tmpid;
-        page.create();//进入页面
+        //记录目标页面
+        _salf.State.currentPage(page);
+        //设置模板和数据
+        _salf.State.tmpid(deftmpid);
+        _salf.State.tmpdata(page.state);
+        _salf.State.tmpid(page.tmpid);
+        page.create(param);//创建页面
         if (history.state==null || path != history.state.path) {
             window.history.pushState({ path, param }, "title", "#" + path);
         }
     }
     this.pageToOrBack = function () {
         var obj= history.state;
-        if (obj.pagename) {
-            _salf.open(obj.pagename, obj.param);
+        if (obj.path) {
+            _salf.open(obj.path, obj.param);
         }
     }
     //初始化

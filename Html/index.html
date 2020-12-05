@@ -26,6 +26,27 @@
                 },
                 child:[]
             }));
+
+            App.addPage(new Page({
+                title:"xxxx2",
+                tmpid:"test2",
+                path:"testpage2",
+                state:{
+                    name:ko.observable("dongdong")
+                },
+                init:function(page){
+                    console.log(this.path+":init");
+                },
+                create:function(param){
+                    console.log(this.path+":create");
+                    console.log(param);
+                },
+                dispose:function(){
+                    console.log(this.path+":dispose");
+                },
+                child:[]
+            }));
+
             App.init();
             jQuery(function(){
                 ko.applyBindings(App);
@@ -33,8 +54,13 @@
             });
             
         </script>
-        <script type="text/template" id="testpage">
+        <script type="text/template" id="test">
             你好
+        </script>
+
+        
+        <script type="text/template" id="test2">
+            你好2
         </script>
         
         <script type="text/template" id="def">
