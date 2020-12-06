@@ -11,8 +11,9 @@
                 title:"xxxx",
                 tmpid:"test",
                 path:"testpage",
-                state:{
-                    name:ko.observable("dongdong")
+                State:{
+                    name:ko.observable("dongdong"),
+                    isif:ko.observable(true)
                 },
                 init:function(page){
                     console.log(this.path+":init");
@@ -31,7 +32,7 @@
                 title:"xxxx2",
                 tmpid:"test2",
                 path:"testpage2",
-                state:{
+                State:{
                     name:ko.observable("dongdong")
                 },
                 init:function(page){
@@ -55,7 +56,13 @@
             
         </script>
         <script type="text/template" id="test">
-            你好
+            {{if $data.isif()}}
+                <span>${$data.name()}</span>
+            {{/if}}
+
+            <div data-bind="text:$data.name">
+            </div>
+            
         </script>
 
         
@@ -68,7 +75,7 @@
         </script>
     </head>
     <body>
-        <div data-bind="template:{ name:App.State.tmpid,data:App.State.tmpdata}">
+        <div data-bind="template:{ name:State.tmpid,data:State.data}">
 
         </div>
 

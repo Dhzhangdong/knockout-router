@@ -16,7 +16,7 @@ var App=new function(){
         currentPage:ko.observable(null),//当前页面
         title:ko.observable("默认页"),//页面title
         tmpid:ko.observable("def"),
-        tmpdata:ko.observable({}),
+        data:ko.observable({}),
     };
     this.pages=[];//页面列表
     //添加页面
@@ -35,11 +35,12 @@ var App=new function(){
         if (_salf.State.currentPage()!=null) {
             _salf.State.currentPage().dispose();
         }
+        console.log(page.State);
         //记录目标页面
         _salf.State.currentPage(page);
         //设置模板和数据
         _salf.State.tmpid(deftmpid);
-        _salf.State.tmpdata(page.state);
+        _salf.State.data(page.State);
         _salf.State.tmpid(page.tmpid);
         page.create(param);//创建页面
         if (history.state==null || path != history.state.path) {
@@ -91,9 +92,9 @@ function Page(setting){
     var _salf=this;
     if(!setting) setting={};
     this.title=setting.title??"默认页";//页面名称
-    this.tmpid=setting.tmpid??"default";//模板
+    this.tmpid=setting.tmpid??"def";//模板
     this.path=setting.path??"index";//路由地址
-    this.state=setting.state??{};//页面状态,
+    this.State=setting.State??{};//页面状态,
     this.init=setting.init??function(){};//初始化函数
     this.create=setting.create??function(param){};//页面创建函数（每次路由进入调用）
     this.dispose=setting.dispose??function(){};//页面销毁函数（每次路由离开调用）
